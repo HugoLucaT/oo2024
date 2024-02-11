@@ -9,18 +9,25 @@ public class Main {
 
         // igast funktsiooniks 2 erineva sisendiga väljakutset
 
-        double kogumaksumus = arvutaTaksoMaksumus(3);
-        String hinnang = tempCheck(2.2);
+        double toenaosus1 = arvutaProtsent(3, 5);
+        double toenaosus2 = arvutaProtsent(9, 14);
+        boolean positiivneNumber1 = numCheck(2.2);
+        boolean positiivneNumber2 = numCheck(-3.1);
         prindiRuut(7);
+        prindiRuut(16);
+        System.out.println(toenaosus1);
+        System.out.println(toenaosus2);
+        System.out.println(positiivneNumber1);
+        System.out.println(positiivneNumber2);
     }
-    private static double arvutaTaksoMaksumus(int kaart) {
-        return 3 + 0.9*kaart;
+    private static double arvutaProtsent(int edukus, int kogu) {
+        return ((double)edukus / kogu);
     }
-    private static String tempCheck(double temp) {
-        if (temp < 0) {
-            return "Vesi on jääs";
+    private static boolean numCheck(double nr) {
+        if (nr < 0) {
+            return false;
         } else {
-            return "On vesi";
+            return true;
         }
     }
 
