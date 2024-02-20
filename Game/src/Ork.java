@@ -1,16 +1,13 @@
 import java.util.Random;
 
-public class Ork {
-
-    int Xkoord;
-    int Ykoord;
-    char Symbol = 'o';
+public class Ork extends Tegelane implements JuhuslikKoordinaat{
     public Ork(Random random, int kaardiKorgus, int kaardiLaius) {
-        Xkoord = saaKoordinaat(random, kaardiLaius);
-        Ykoord = saaKoordinaat(random, kaardiKorgus);
+        this.Xkoord = saaKoordinaat(random, kaardiLaius);
+        this.Ykoord = saaKoordinaat(random, kaardiKorgus);
+        this.Symbol = 'o';
     }
 
-    private int saaKoordinaat(Random random, int kaart) {
+    public int saaKoordinaat(Random random, int kaart) {
         return random.nextInt(1, kaart-1);
     }
 }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Maailm {
     int kaardiKorgus;
     int kaardiLaius;
@@ -7,7 +9,7 @@ public class Maailm {
         kaardiLaius = laius;
     }
 
-    public void prindiKaart(Mangija mangija, Draakon draakon, Ork ork) {
+    public void prindiKaart(List<Tegelane> tegelased, List<Ese> esemed) {
         for (int y = 0; y < kaardiKorgus; y++) {
             for (int x = 0; x < kaardiLaius; x++) {
                 char symbol;
@@ -18,18 +20,18 @@ public class Maailm {
                     //System.out.print('|');
                     symbol = '|';
                 } else {
-
-                    if (x == mangija.Xkoord && y == mangija.Ykoord) {
-                        //System.out.print(mangijaSymbol);
-                        symbol = mangija.Symbol;
-                    } else if (x == draakon.Xkoord && y == draakon.Ykoord) {
-                        symbol = draakon.Symbol;
-                    } else if (x == ork.Xkoord && y == ork.Ykoord) {
-                        symbol = ork.Symbol;
-                    } else {
-                        //System.out.print(' ');
-                        symbol = ' ';
+                    symbol = ' ';
+                    for (Ese e : esemed){
+                        if (e.Xkoord == x && e.Ykoord == y){
+                            symbol = e.symbol;
+                        }
+                    }//System.out.print(' ');
+                    for (Tegelane t : tegelased){
+                        if (t.Xkoord == x && t.Ykoord == y){
+                            symbol = t.Symbol;
+                        }
                     }
+
                 }
                 System.out.print(symbol);
             }

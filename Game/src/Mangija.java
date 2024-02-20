@@ -1,10 +1,10 @@
 import java.util.Random;
 
-public class Mangija {
-    int Xkoord;
-    int Ykoord;
-    char Symbol;
+// igal klassil saab olla 1 ulemklass, tegelane on mangja ulemklass
+public class Mangija extends Tegelane implements JuhuslikKoordinaat {
     Suund suund;
+    Ese ese; //klassikomplekt
+    Soiduk soiduk;
 
     public Mangija(Random random, int kaardiKorgus, int kaardiLaius) {
         Xkoord = saaKoordinaat(random, kaardiLaius);
@@ -35,7 +35,7 @@ public class Mangija {
             }
         }
     } //liigu()
-    private int saaKoordinaat(Random random, int kaart) {
+    public int saaKoordinaat(Random random, int kaart) {
         return random.nextInt(1, kaart-1);
     }
 } //mangjia
