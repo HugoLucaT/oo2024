@@ -9,7 +9,7 @@ public class Maailm {
         kaardiLaius = laius;
     }
 
-    public void prindiKaart(List<Tegelane> tegelased, List<Ese> esemed) {
+    public void prindiKaart(List<Tegelane> tegelased, List<Ese> esemed, List<Soiduk> soidukid) {
         for (int y = 0; y < kaardiKorgus; y++) {
             for (int x = 0; x < kaardiLaius; x++) {
                 char symbol;
@@ -26,6 +26,11 @@ public class Maailm {
                             symbol = e.symbol;
                         }
                     }//System.out.print(' ');
+                    for (Soiduk s : soidukid){
+                        if (s.Xkoord == x && s.Ykoord == y){
+                            symbol = s.symbol;
+                        }
+                    }
                     for (Tegelane t : tegelased){
                         if (t.Xkoord == x && t.Ykoord == y){
                             symbol = t.Symbol;

@@ -5,7 +5,7 @@ public class Soiduk {
     String nimetus;
     int Ykoord;
     int Xkoord;
-    int symbol;
+    char symbol;
 
     public Soiduk(int kiirus, String nimetus, Random random, Maailm maailm) {
         this.kiirus = kiirus;

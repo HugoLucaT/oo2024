@@ -34,7 +34,7 @@ public class Main {
         List<Soiduk> soidukid = new ArrayList<>();
         soidukid.add(auto);
 
-        maailm.prindiKaart(tegelased, esemed);
+        maailm.prindiKaart(tegelased, esemed, soidukid);
         //scanner on ka klass
         Scanner scanner = new Scanner(System.in);
         String sisend = scanner.nextLine();
@@ -43,13 +43,20 @@ public class Main {
 
         while (!sisend.equals("end")) {
             //mangjaliigu
-            maailm.prindiKaart(tegelased, esemed);
+            maailm.prindiKaart(tegelased, esemed, soidukid);
             sisend = scanner.nextLine();
             mangija.liigu(sisend, maailm);
             for (Ese e: esemed){
                 if (mangija.Xkoord == e.Xkoord && mangija.Ykoord == e.Ykoord){
                     mangija.ese = e;
                     System.out.println("Korjasid ules eseme: " + e.nimetus);
+                    break;
+                }
+            }
+            for (Soiduk s: soidukid){
+                if (mangija.Xkoord == s.Xkoord && mangija.Ykoord == s.Ykoord){
+                    mangija.soiduk = s;
+                    System.out.println("Leidsid soiduki: " + s.nimetus);
                     break;
                 }
             }

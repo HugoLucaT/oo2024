@@ -6,6 +6,8 @@ public class Mangija extends Tegelane implements JuhuslikKoordinaat {
     Ese ese; //klassikomplekt
     Soiduk soiduk;
 
+
+
     public Mangija(Random random, int kaardiKorgus, int kaardiLaius) {
         Xkoord = saaKoordinaat(random, kaardiLaius);
         Ykoord = saaKoordinaat(random, kaardiKorgus);
