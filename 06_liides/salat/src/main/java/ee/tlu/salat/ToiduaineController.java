@@ -38,7 +38,6 @@ public class ToiduaineController {
     }
 
     //PutMappingut ei saa brauser teha
-    //localhost:8080/toiduained/0 Delete
     @PutMapping("toiduained/{index}")
     public List<String> muudaToiduaine(@PathVariable int index, @PathVariable String newValue){
         toiduained.set(index, newValue);
