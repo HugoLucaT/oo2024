@@ -10,40 +10,54 @@ import java.util.List;
 @RequestMapping("/api")
 
 public class ToiduaineEntityController {
-    List<ToiduaineEntity> toiduained = new ArrayList<>(); // imiteerime andmebaasi
+
+    ToiduaineRepository toiduaineRepository;
+
+    public ToiduaineEntityController(ToiduaineRepository toiduaineRepository){
+        this.toiduaineRepository = toiduaineRepository;
+    }
+
+    //List<ToiduaineEntity> toiduained = new ArrayList<>(); // imiteerime andmebaasi
 
     @GetMapping("toiduained")
     public List<ToiduaineEntity> saaToiduained(){
-        return toiduained;
+        return toiduaineRepository.findAll();
     }
 
-    @GetMapping("toiduaine/{index}")
-    public ToiduaineEntity saaYksToiduaine(@PathVariable int index){
-        return toiduained.get(index);
+    @GetMapping("toiduaine/{nimi}")
+    public ToiduaineEntity saaYksToiduaine(@PathVariable String nimi){
+        return toiduaineRepository.findById(nimi).get();
     }
 
     @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}")
     public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik){
         ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
-        toiduained.add(toiduaine);
-        return toiduained;
+        toiduaineRepository.save(toiduaine);
+        return toiduaineRepository.findAll();
     }
 
-    @DeleteMapping("toiduained/{index}")
-    public List<ToiduaineEntity> kustutaToiduaine(@PathVariable int index){
-        toiduained.remove(index);
-        return toiduained;
+    @PostMapping("toiduained")
+    public List<ToiduaineEntity> lisaToiduaine(@RequestBody ToiduaineEntity toiduaineEntity){
+        if (toiduaineEntity.valk + toiduaineEntity.rasv + toiduaineEntity.sysivesik > 100){
+            return toiduaineRepository.findAll();
+        }
+        toiduaineRepository.save(toiduaineEntity);
+        return toiduaineRepository.findAll();
+    }
+
+    @DeleteMapping("toiduained/{nimi}")
+    public List<ToiduaineEntity> kustutaToiduaine(@PathVariable String nimi){
+        toiduaineRepository.deleteById(nimi);
+        return toiduaineRepository.findAll();
     }
 
 
     //localhost:8080/api/toiduained?index=0&nimi=Vorst&valk=10&rasv=10&sysivesik=10
-    @PutMapping("toiduained/{index}")
+    @PutMapping("toiduained")
     public List<ToiduaineEntity> muudaToiduaine(@RequestParam int index, @RequestParam String nimi, @RequestParam int valk, @RequestParam int rasv, @RequestParam int sysivesik){
         ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
-        toiduained.set(index, toiduaine);
-
-
-        return toiduained;
+        toiduaineRepository.save(toiduaine); //hibrenate kontrollib kas element on juba andmebaasis
+        return toiduaineRepository.findAll();
     }
 
     @GetMapping("tere/{nimi}")
