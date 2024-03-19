@@ -67,8 +67,8 @@ public class Arvutamine {
         return tootajad;
     }
 
-    @PutMapping("tootajad/{index}")
-    public List<Tootaja> muudaToiduaine(@PathVariable int index, @PathVariable String nimi, @PathVariable String tookoht, @PathVariable int palk){
+    @PutMapping("tootajad/{index}/{nimi}/{tookoht}/{palk}")
+    public List<Tootaja> muudaTootaja(@PathVariable int index, @PathVariable String nimi, @PathVariable String tookoht, @PathVariable int palk){
         Tootaja uusTootaja = new Tootaja(nimi, tookoht, palk);
         tootajad.set(index, uusTootaja);
         return tootajad;
