@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 
 public class Arvutamine {
-    List<Integer> numbrid = new ArrayList<>(); // imiteerime andmebaasi
-    @GetMapping("arvud")
+    //List<Integer> numbrid = new ArrayList<>(); // imiteerime andmebaasi
+
+    TootajaRepository tootajaRepository;
+
+    public Arvutamine(TootajaRepository tootajaRepository){
+        this.tootajaRepository = tootajaRepository;
+    }
+
+    /*@GetMapping("arvud")
     public List<Integer> saaArvud(){
         return numbrid;
     }
@@ -45,41 +53,48 @@ public class Arvutamine {
             summa += n;
         }
         return summa/numbrid.size();
-    }
+    }*/
 
-    List<Tootaja> tootajad = new ArrayList<>();
+    //List<Tootaja> tootajad = new ArrayList<>();
 
     @GetMapping("tootajad")
     public List<Tootaja> saaTootajad(){
-        return tootajad;
+        return tootajaRepository.findAll();
+    }
+
+    @PostMapping("tootajad")
+    public List<Tootaja> lisaToiduaine(@RequestBody Tootaja tootaja){
+        tootajaRepository.save(tootaja);
+        return tootajaRepository.findAll();
     }
 
     @PostMapping("lisatootaja/{nimi}/{tookoht}/{palk}")
     public List<Tootaja> lisaTootaja(@PathVariable String nimi, @PathVariable String tookoht, @PathVariable int palk){
         Tootaja uusTootaja = new Tootaja(nimi, tookoht, palk);
-        tootajad.add(uusTootaja);
-        return tootajad;
+        tootajaRepository.save(uusTootaja);
+        return tootajaRepository.findAll();
     }
 
-    @DeleteMapping("tootajad/{index}")
-    public List<Tootaja> kustutaTootaja(@PathVariable int index){
-        tootajad.remove(index);
-        return tootajad;
+    @DeleteMapping("tootajad/{nimi}")
+    public List<Tootaja> kustutaTootaja(@PathVariable String nimi){
+        tootajaRepository.deleteById(nimi);
+        return tootajaRepository.findAll();
     }
 
     @PutMapping("tootajad/{index}/{nimi}/{tookoht}/{palk}")
     public List<Tootaja> muudaTootaja(@PathVariable int index, @PathVariable String nimi, @PathVariable String tookoht, @PathVariable int palk){
         Tootaja uusTootaja = new Tootaja(nimi, tookoht, palk);
-        tootajad.set(index, uusTootaja);
-        return tootajad;
+        tootajaRepository.save(uusTootaja);
+        return tootajaRepository.findAll();
     }
 
-    @GetMapping("tootajad/palk")
+    /*@GetMapping("tootajad/palk")
     public int palk(){
         int palk = 0;
+
         for (Tootaja t: tootajad){
             palk += t.palk;
         }
         return palk;
-    }
+    }*/
 }

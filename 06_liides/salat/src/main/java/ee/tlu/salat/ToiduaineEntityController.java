@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-
+@CrossOrigin(origins = "http://localhost:3000")
 public class ToiduaineEntityController {
 
     ToiduaineRepository toiduaineRepository;
@@ -29,12 +29,12 @@ public class ToiduaineEntityController {
         return toiduaineRepository.findById(nimi).get();
     }
 
-    @PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}")
+    /*@PostMapping("toiduained/{nimi}/{valk}/{rasv}/{sysivesik}")
     public List<ToiduaineEntity> lisaToiduaine(@PathVariable String nimi, @PathVariable int valk, @PathVariable int rasv, @PathVariable int sysivesik){
         ToiduaineEntity toiduaine = new ToiduaineEntity(nimi, valk, rasv, sysivesik);
         toiduaineRepository.save(toiduaine);
         return toiduaineRepository.findAll();
-    }
+    }*/
 
     @PostMapping("toiduained")
     public List<ToiduaineEntity> lisaToiduaine(@RequestBody ToiduaineEntity toiduaineEntity){
@@ -60,7 +60,7 @@ public class ToiduaineEntityController {
         return toiduaineRepository.findAll();
     }
 
-    @GetMapping("tere/{nimi}")
+    /*@GetMapping("tere/{nimi}")
     public String hello(@PathVariable String nimi){
         return "Tere " + nimi;
     }
@@ -68,5 +68,15 @@ public class ToiduaineEntityController {
     @GetMapping("korruta/{arv1}/{arv2}")
     public int multiply(@PathVariable int arv1, @PathVariable int arv2){
         return arv1 * arv2;
+    }*/
+
+    @GetMapping("toiduained-valk-min/{minValk}")
+    public List<ToiduaineEntity> toiduainedMinValk(@PathVariable int minValk){
+        return toiduaineRepository.findAllByValkGreaterThan(minValk);
+    }
+
+    @GetMapping("toiduained-sysivesik/{min}/{max}")
+    public List<ToiduaineEntity> toiduainedSysivesik(@PathVariable int min, @PathVariable int max){
+        return toiduaineRepository.findAllBySysivesikBetween(min, max);
     }
 }

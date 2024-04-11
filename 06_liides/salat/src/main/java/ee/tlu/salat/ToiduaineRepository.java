@@ -2,6 +2,12 @@ package ee.tlu.salat;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ToiduaineRepository extends JpaRepository<ToiduaineEntity, String> {
+import java.util.List;
 
+public interface ToiduaineRepository extends JpaRepository<ToiduaineEntity, String> {
+    // siia saab kirjutada custom repository kaske
+
+    List<ToiduaineEntity> findAllByValkGreaterThan(int valk);
+
+    List<ToiduaineEntity> findAllBySysivesikBetween(int min, int max);
 }

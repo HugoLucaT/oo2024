@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-
+@CrossOrigin(origins = "*")
 public class ToiduaineController {
     List<String> toiduained = new ArrayList<>(); // imiteerime andmebaasi
 
