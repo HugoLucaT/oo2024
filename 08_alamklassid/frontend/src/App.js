@@ -91,7 +91,7 @@ function App() {
       .then(response => response.json()) 
       .then(json => {
         setToidukomponendid(json);
-      })
+    })
   }
 
   return (
