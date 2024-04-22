@@ -23,7 +23,7 @@ public class TootajapalkController {
     // --> PathVariable: http://localhost:8080/toidukomponendid/4
     // RequestParam: http://localhost:8080/toidukomponendid?id=4
     @DeleteMapping("tookohad/{id}")
-    public List<Tootajapalk> deleteTookoht(@PathVariable Long id) {
+    public List<Tootajapalk> deleteTookoht(@PathVariable String id) {
         tootajapalkRepository.deleteById(id);
         return tootajapalkRepository.findAll();
     }

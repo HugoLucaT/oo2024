@@ -1,4 +1,4 @@
-package ee.tlu.salat;
+package ee.tlu.salat.entity;
 
 //koosneb toiduaines ja temaga seotud kogusest toidu sees
 //Klassikomplekt -> Kartul+omadused ja mitu grammi
@@ -16,7 +16,7 @@ public class Toidukomponent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @ManyToOne //@ManyToMany on listidele
+    @ManyToOne //(cascade = CascadeType.ALL) //@ManyToMany on listidele
     ToiduaineEntity toiduaine;
     int kogus;
 }

@@ -1,4 +1,4 @@
-package ee.tlu.salat;
+package ee.tlu.salat.entity;
 
 
 // jpa moodulist parinev. Hibernate.
@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor //andmebaasipanemiseks
 public class ToiduaineEntity {
     @Id
-    String nimetus;
-    int valk;
-    int rasv;
-    int sysivesik;
+    private String nimetus;
+    private int valk;
+    private int rasv;
+    private int sysivesik;
 
     /*public ToiduaineEntity(String nimetus, int valk, int rasv, int sysivesik) {
         this.nimetus = nimetus;
