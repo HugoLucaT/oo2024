@@ -101,15 +101,15 @@ public class RestTemplateController {
         return timeStampPrices;
     }
 
+
+
+
+
     @GetMapping("tookohad")
     public List<Job> saaKoik(){
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://jobicy.com/api/v2/remote-jobs?count=50&geo=estonia&industry=engineering";
         ResponseEntity<JobRoot> response =  restTemplate.exchange(url, HttpMethod.GET, null, JobRoot.class);
-        /*List<Job> koik = new ArrayList<>();
-        for (Job j : response.getBody().getJobs()){
-            koik.add(j);
-        }*/
         return response.getBody().getJobs();
     }
 
@@ -160,7 +160,7 @@ public class RestTemplateController {
         ResponseEntity<JobRoot> response =  restTemplate.exchange(url, HttpMethod.GET, null, JobRoot.class);
         List<Job> tookohad = new ArrayList<>();
         for (Job j : response.getBody().getJobs()) {
-            if (Integer.valueOf(j.getAnnualSalaryMin()) >= palk) {
+            if (j.getAnnualSalaryMin() != null && Integer.valueOf(j.getAnnualSalaryMin()) >= palk) {
                 tookohad.add(j);
             }
         }
