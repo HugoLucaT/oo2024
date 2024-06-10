@@ -1,0 +1,16 @@
+body{
+    margin:0;
+    padding:0;
+    background-color: purple;
+    color:white;
+}
+
+#settings{
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 3em;
+}
